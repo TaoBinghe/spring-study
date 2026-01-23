@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--========== Bean实例化方式 ==========-->
+    
+    <!--方式一:构造方法实例化bean-->
+    <bean id="bookDao" class="com.coder.dao.impl.BookDaoImpl">
+        <!--setter注入示例：注入简单值（value）-->
+        <!--注入String类型属性-->
+        <property name="databaseName" value="mysql"/>
+        <!--注入int类型属性-->
+        <property name="connectionNum" value="10"/>
+    </bean>
+
+    <!--方式二:使用静态工厂实例化bean-->
+    <bean id="orderDao" class="com.coder.factory.OrderDaoFactory" factory-method="getOrderDao"/>
+
+    <!--方式三:使用实例工厂实例化bean-->
+    <bean id="userFactory" class="com.coder.factory.UserDaoFactory"/>
+    <bean id="userDao" factory-method="getUserDao" factory-bean="userFactory"/>
+
+    <!--方式四:使用FactoryBean实例化bean-->
+    <!--注意：配置的是FactoryBean本身，但获取的bean是FactoryBean.getObject()返回的对象-->
+    <bean id="userDaoByFactoryBean" class="com.coder.factory.UserDaoFactoryBean"/>
+
+    <!--========== Setter注入示例 ==========-->
+    
+    <!--bookService bean - 演示setter注入对象引用（ref）-->
+    <bean id="bookService" class="com.coder.service.impl.BookServiceImpl">
+        <!--注入对象引用 - 引用bookDao bean-->
+        <property name="bookDao" ref="bookDao"/>
+        <!--注入对象引用 - 引用userDao bean-->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <!--原有的bookService配置（保留）-->
+    <bean id="bookSaveService" class="com.coder.service.impl.BookSaveImpl">
+        <!--配置关系-->
+        <property name="bookDao1" ref="bookDao"/>
+    </bean>
+
+</beans>
