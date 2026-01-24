@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--========== 加载properties文件 ==========-->
+    
+    <!-- 1.开启context命名空间-->
+    <!-- 在beans标签中添加: xmlns:context="http://www.springframework.org/schema/context" -->
+    <!-- 在xsi:schemaLocation中添加: http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd -->
+    
+    <!-- 2. 使用context空间加载properties 文件-->
+    <context:property-placeholder location="jdbc.properties"/>
+    
+    <!-- 3. 使用属性占位符${}读取properties文件中的属性-->
+    
+    <!--========== context:property-placeholder 其他配置方式 ==========-->
+    
+    <!--方式一：不加载系统属性-->
+    <!--<context:property-placeholder location="jdbc.properties" system-properties-mode="NEVER"/>-->
+    
+    <!--方式二：加载多个properties文件-->
+    <!--<context:property-placeholder location="jdbc.properties,msg.properties"/>-->
+    
+    <!--方式三：加载所有properties文件-->
+    <!--<context:property-placeholder location="*.properties"/>-->
+    
+    <!--方式四：加载properties文件标准格式（从类路径加载）-->
+    <!--<context:property-placeholder location="classpath:*.properties"/>-->
+    
+    <!--方式五：从类路径或jar包中搜索并加载properties文件-->
+    <!--<context:property-placeholder location="classpath*:*.properties"/>-->
+    
+    <!--========== 数据源配置示例 ==========-->
+    
+    <!--方式一：硬编码配置-->
+    <!--
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+        <property name="maxPoolSize" value="1000"/>
+    </bean>
+    -->
+    
+    <!--方式二：使用属性占位符${}读取properties文件（推荐）-->
+    
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+
+</beans>

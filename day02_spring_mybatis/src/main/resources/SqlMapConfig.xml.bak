@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- MyBatis 核心配置文件 -->
+    <!-- 注意：当使用 Spring 整合 MyBatis 时，很多配置可以在 Spring 配置中完成 -->
+    
+    <!-- 类型别名 -->
+    <typeAliases>
+        <package name="com.coder.domain"/>
+    </typeAliases>
+    
+    <!-- 映射文件位置（可选，也可以在 Spring 配置中指定） -->
+    <!-- <mappers>
+        <mapper resource="com/coder/dao/AccountDao.xml"/>
+    </mappers> -->
+</configuration>
