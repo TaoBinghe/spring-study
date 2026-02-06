@@ -13,6 +13,8 @@
         <module>day02</module>
         <module>day02_spring_mybatis</module>
         <module>day02_spring_mybatis</module>
+        <module>day03_AOP</module>
+        <module>day03_transaction</module>
     </modules>
     <dependencies>
         <dependency>
@@ -26,6 +28,14 @@
             <artifactId>lombok</artifactId>
             <version>1.18.42</version>
         </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.25.1</version>
+        </dependency>
+
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
